@@ -34,6 +34,11 @@ ball.shapesize(stretch_wid=1, stretch_len=1)
 ball.penup()
 ball.goto(0, 0)
 
+# la siguente instruccion es para la velocidad de la bola
+ball.dx = 0.15
+ball.dy = 0.15
+
+
 #Function
 def paddleA_up():
     y = paddleA.ycor()
@@ -69,4 +74,25 @@ wn.onkeypress(paddleB_down, 'l')
 #Main game loop
 while True:
     wn.update()
+    
+    #Move the ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    #Border checking
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1
+
+    if ball.xcor() > 390:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
 
